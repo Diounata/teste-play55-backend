@@ -34,11 +34,12 @@ export class Account {
     updatedAt: Date | null = null,
   ): Account {
     const accountId = Ulid.create().getValue();
+    const hashedPassword = Password.create(rawPassword).getValue();
     return new Account(
       accountId,
       name,
       email,
-      rawPassword,
+      hashedPassword,
       createdAt,
       updatedAt,
     );
