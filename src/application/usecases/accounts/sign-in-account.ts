@@ -16,7 +16,7 @@ export class SignInAccountUseCase implements UseCase {
   constructor(
     private accountsRepository: AccountsRepository,
     private encrypter: Encrypter,
-  ) { }
+  ) {}
 
   async handle(input: Input): Promise<Output> {
     const account = await this.accountsRepository.findAccountByEmail(

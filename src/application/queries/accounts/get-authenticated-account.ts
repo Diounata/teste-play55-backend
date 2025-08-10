@@ -1,5 +1,5 @@
 import { DatabaseConnection } from '@/application/database/database-connection';
-import { ResourceNotFoundError } from '@/application/usecases/_errors/resource-not-found';
+import { AccountNotFoundError } from '@/application/usecases/accounts/_errors/account-not-found-error';
 import { Either, left, right } from '@/core/either';
 import { QueryError } from '@/core/errors/query-error';
 import { Injectable } from '@nestjs/common';
@@ -41,7 +41,7 @@ export class DeprecatedGetAuthenticatedAccountQuery {
     );
 
     if (!queryData) {
-      return left(new ResourceNotFoundError());
+      return left(new AccountNotFoundError());
     }
 
     const account = queryData[0];
