@@ -14,8 +14,10 @@
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
+    "bcryptjs": "^3.0.2",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
+    "ulid": "^3.0.1",
     "unplugin-swc": "^1.5.5",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"

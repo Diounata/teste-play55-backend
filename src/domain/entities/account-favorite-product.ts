@@ -1,0 +1,51 @@
+import { Ulid } from '@/domain/value-objects/ulid';
+import { AuditTimestamps } from '../value-objects/audit-timestamps';
+
+export class AccountFavoriteProduct {
+  private accountFavoriteProductId: Ulid;
+  private accountId: Ulid;
+  private productId: Ulid;
+  private auditTimestamps: AuditTimestamps;
+
+  constructor(
+    accountFavoriteProductId: string,
+    accountId: string,
+    productId: string,
+    createdAt: Date,
+  ) {
+    this.accountFavoriteProductId = new Ulid(accountFavoriteProductId);
+    this.accountId = new Ulid(accountId);
+    this.productId = new Ulid(productId);
+    this.auditTimestamps = new AuditTimestamps(createdAt);
+  }
+
+  static create(
+    accountId: string,
+    productId: string,
+    createdAt: Date,
+  ): AccountFavoriteProduct {
+    const accountFavoriteProductId = Ulid.create().getValue();
+    return new AccountFavoriteProduct(
+      accountFavoriteProductId,
+      accountId,
+      productId,
+      createdAt,
+    );
+  }
+
+  getId() {
+    return this.accountFavoriteProductId.getValue();
+  }
+
+  getAccountId() {
+    return this.accountId.getValue();
+  }
+
+  getProductId() {
+    return this.productId.getValue();
+  }
+
+  getCreatedAt() {
+    return this.auditTimestamps.getCreatedAt();
+  }
+}
