@@ -6,7 +6,7 @@ describe('[Entity] Account', () => {
     expect(account.getId()).toEqual(expect.any(String));
     expect(account.getName()).toEqual(expect.any(String));
     expect(account.getEmail()).toEqual(expect.any(String));
-    expect(account.getPassword()).toEqual(expect.any(String));
+    expect(account.getPassword().getValue()).toEqual(expect.any(String));
     expect(account.getCreatedAt()).toBeInstanceOf(Date);
     expect(account.getUpdatedAt()).toEqual(null);
   });

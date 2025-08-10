@@ -58,7 +58,7 @@ export class Account {
   }
 
   getPassword() {
-    return this.password.getValue();
+    return this.password;
   }
 
   getCreatedAt() {
