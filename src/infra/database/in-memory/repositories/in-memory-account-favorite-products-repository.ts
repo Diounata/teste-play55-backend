@@ -6,14 +6,6 @@ export class InMemoryAccountFavoriteProductsRepository
 {
   accountFavoriteProducts: AccountFavoriteProduct[] = [];
 
-  findAccountFavoriteProduct(accountId: string, productId: number) {
-    const favorite = this.accountFavoriteProducts.find(
-      (fav) =>
-        fav.getAccountId() === accountId && fav.getProductId() === productId,
-    );
-    return Promise.resolve(favorite ?? null);
-  }
-
   favoriteProduct(accountFavoriteProduct: AccountFavoriteProduct) {
     this.accountFavoriteProducts.push(accountFavoriteProduct);
     return Promise.resolve();
@@ -26,5 +18,20 @@ export class InMemoryAccountFavoriteProductsRepository
         fav.getProductId() !== accountFavoriteProduct.getProductId(),
     );
     return Promise.resolve();
+  }
+
+  findAccountFavoriteProduct(accountId: string, productId: number) {
+    const favorite = this.accountFavoriteProducts.find(
+      (fav) =>
+        fav.getAccountId() === accountId && fav.getProductId() === productId,
+    );
+    return Promise.resolve(favorite ?? null);
+  }
+
+  listAccountFavoriteProducts(accountId: string) {
+    const favorites = this.accountFavoriteProducts.filter(
+      (fav) => fav.getAccountId() === accountId,
+    );
+    return Promise.resolve(favorites);
   }
 }
