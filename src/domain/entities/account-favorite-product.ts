@@ -4,24 +4,24 @@ import { AuditTimestamps } from '../value-objects/audit-timestamps';
 export class AccountFavoriteProduct {
   private accountFavoriteProductId: Ulid;
   private accountId: Ulid;
-  private productId: Ulid;
+  private productId: number;
   private auditTimestamps: AuditTimestamps;
 
   constructor(
     accountFavoriteProductId: string,
     accountId: string,
-    productId: string,
+    productId: number,
     createdAt: Date | null = null,
   ) {
     this.accountFavoriteProductId = new Ulid(accountFavoriteProductId);
     this.accountId = new Ulid(accountId);
-    this.productId = new Ulid(productId);
+    this.productId = productId;
     this.auditTimestamps = new AuditTimestamps(createdAt);
   }
 
   static create(
     accountId: string,
-    productId: string,
+    productId: number,
     createdAt: Date | null = null,
   ): AccountFavoriteProduct {
     const accountFavoriteProductId = Ulid.create().getValue();
@@ -42,7 +42,7 @@ export class AccountFavoriteProduct {
   }
 
   getProductId() {
-    return this.productId.getValue();
+    return this.productId;
   }
 
   getCreatedAt() {

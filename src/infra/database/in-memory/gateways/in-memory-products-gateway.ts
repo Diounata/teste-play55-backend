@@ -3,7 +3,8 @@ import { Product } from '@/domain/entities/product';
 
 export class InMemoryProductsGateway implements ProductsGateway {
   products: Product[] = [
-    Product.create(
+    new Product(
+      1,
       'Product 1',
       'Description 1',
       'Category 1',
@@ -12,7 +13,7 @@ export class InMemoryProductsGateway implements ProductsGateway {
     ),
   ];
 
-  async findProductById(productId: string) {
+  async findProductById(productId: number) {
     const product = this.products.find((prod) => prod.getId() === productId);
     return product || null;
   }

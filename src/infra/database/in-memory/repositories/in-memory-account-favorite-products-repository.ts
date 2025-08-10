@@ -6,7 +6,7 @@ export class InMemoryAccountFavoriteProductsRepository
 {
   accountFavoriteProducts: AccountFavoriteProduct[] = [];
 
-  findAccountFavoriteProduct(accountId: string, productId: string) {
+  findAccountFavoriteProduct(accountId: string, productId: number) {
     const favorite = this.accountFavoriteProducts.find(
       (fav) =>
         fav.getAccountId() === accountId && fav.getProductId() === productId,

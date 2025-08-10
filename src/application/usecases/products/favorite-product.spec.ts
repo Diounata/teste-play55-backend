@@ -58,7 +58,7 @@ describe('[UC] Favorite product to an account', () => {
 
     const result = await sut.handle({
       accountId: account.getId(),
-      productId: 'nonexistent-product-id',
+      productId: 10,
     });
 
     expect(result.isLeft()).toBe(true);

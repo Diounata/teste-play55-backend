@@ -3,7 +3,7 @@ import { AccountFavoriteProduct } from '@/domain/entities/account-favorite-produ
 export abstract class AccountFavoriteProductsRepository {
   abstract findAccountFavoriteProduct(
     accountId: string,
-    productId: string,
+    productId: number,
   ): Promise<AccountFavoriteProduct | null>;
   abstract favoriteProduct(
     accountFavoriteProduct: AccountFavoriteProduct,

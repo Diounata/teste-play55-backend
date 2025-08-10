@@ -11,12 +11,12 @@ import { AccountFavoriteProduct } from '@/domain/entities/account-favorite-produ
 
 export interface Input {
   accountId: string;
-  productId: string;
+  productId: number;
 }
 
 export type Output = Either<
   UseCaseError,
-  { accountId: string; productId: string; accountFavoriteProductId: string }
+  { accountId: string; productId: number; accountFavoriteProductId: string }
 >;
 
 export class FavoriteProductUseCase implements UseCase {

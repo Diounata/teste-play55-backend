@@ -2,7 +2,6 @@ import { DatabaseConnection } from '@/application/database/database-connection';
 import { AccountNotFoundError } from '@/application/usecases/accounts/_errors/account-not-found-error';
 import { Either, left, right } from '@/core/either';
 import { QueryError } from '@/core/errors/query-error';
-import { Injectable } from '@nestjs/common';
 
 interface Input {
   accountId: string;
@@ -21,8 +20,7 @@ type Output = Either<
   }
 >;
 
-@Injectable()
-export class DeprecatedGetAuthenticatedAccountQuery {
+export class GetAuthenticatedAccountQuery {
   constructor(private database: DatabaseConnection) {}
 
   async handle(input: Input): Promise<Output> {

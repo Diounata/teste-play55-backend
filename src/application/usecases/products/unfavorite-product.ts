@@ -6,12 +6,12 @@ import { FavoriteProductNotFoundError } from './_errors/favorite-product-not-fou
 
 export interface Input {
   accountId: string;
-  productId: string;
+  productId: number;
 }
 
 export type Output = Either<
   UseCaseError,
-  { accountId: string; productId: string }
+  { accountId: string; productId: number }
 >;
 
 export class UnfavoriteProductUseCase implements UseCase {
