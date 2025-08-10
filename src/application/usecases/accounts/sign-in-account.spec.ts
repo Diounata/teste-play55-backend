@@ -2,7 +2,7 @@ import { AccountsRepository } from '@/application/repositories/accounts-reposito
 import { InvalidCredentialsError } from '@/application/usecases/_errors/invalid-credentials-error';
 import { SignInAccountUseCase } from '@/application/usecases/accounts/sign-in-account';
 import { Account } from '@/domain/entities/account';
-import { InMemoryAccountsRepository } from '@/infra/database/in-memory/in-memory-accounts-repository';
+import { InMemoryAccountsRepository } from '@/infra/database/in-memory/repositories/in-memory-accounts-repository';
 import { FakeEncrypter } from 'test/cryptography/fake-encrypter';
 import { describe } from 'vitest';
 

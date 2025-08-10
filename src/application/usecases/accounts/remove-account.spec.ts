@@ -3,7 +3,7 @@ import { InvalidCredentialsError } from '@/application/usecases/_errors/invalid-
 import { AccountNotFoundError } from '@/application/usecases/accounts/_errors/account-not-found-error';
 import { RemoveAccountUseCase } from '@/application/usecases/accounts/remove-account';
 import { Account } from '@/domain/entities/account';
-import { InMemoryAccountsRepository } from '@/infra/database/in-memory/in-memory-accounts-repository';
+import { InMemoryAccountsRepository } from '@/infra/database/in-memory/repositories/in-memory-accounts-repository';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 let accountsRepository: AccountsRepository;
@@ -16,9 +16,12 @@ describe('[UC] Remove account', () => {
   });
 
   it('should remove an account', async () => {
-    const account = await accountsRepository.registerAccount(
-      Account.create('John Doe', 'john.doe@example.com', 'password123'),
+    const account = Account.create(
+      'John Doe',
+      'john.doe@example.com',
+      'password123',
     );
+    await accountsRepository.registerAccount(account);
 
     const result = await sut.handle({
       accountId: account.getId(),
@@ -37,9 +40,12 @@ describe('[UC] Remove account', () => {
   });
 
   it('should not remove an account with wrong password', async () => {
-    const account = await accountsRepository.registerAccount(
-      Account.create('John Doe', 'john.doe@example.com', 'password123'),
+    const account = Account.create(
+      'John Doe',
+      'john.doe@example.com',
+      'password123',
     );
+    await accountsRepository.registerAccount(account);
 
     const result = await sut.handle({
       accountId: account.getId(),

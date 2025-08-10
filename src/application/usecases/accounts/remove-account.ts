@@ -28,11 +28,10 @@ export class RemoveAccountUseCase implements UseCase {
       return left(new InvalidCredentialsError());
     }
 
-    const result = await this.accountsRepository.removeAccount(account);
-    if (!result) return left(new AccountNotFoundError());
+    await this.accountsRepository.removeAccount(account);
 
     return right({
-      accountId: result.getId(),
+      accountId: account.getId(),
     });
   }
 }

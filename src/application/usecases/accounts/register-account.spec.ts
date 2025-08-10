@@ -1,6 +1,6 @@
 import { AccountsRepository } from '@/application/repositories/accounts-repository';
 import { RegisterAccountUseCase } from '@/application/usecases/accounts/register-account';
-import { InMemoryAccountsRepository } from '@/infra/database/in-memory/in-memory-accounts-repository';
+import { InMemoryAccountsRepository } from '@/infra/database/in-memory/repositories/in-memory-accounts-repository';
 import { FakeEncrypter } from 'test/cryptography/fake-encrypter';
 import { describe } from 'vitest';
 import { DuplicateEmailError } from '../_errors/duplicate-email-error';

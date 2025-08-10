@@ -55,16 +55,12 @@ export class EditAccountCredentialsUseCase implements UseCase {
       new Date(),
     );
 
-    const result = await this.accountsRepository.editAccount(updatedAccount);
-
-    if (!result) {
-      return left(new AccountNotFoundError());
-    }
+    await this.accountsRepository.editAccount(updatedAccount);
 
     return right({
-      accountId: result.getId(),
-      name: result.getName(),
-      email: result.getEmail(),
+      accountId: updatedAccount.getId(),
+      name: updatedAccount.getName(),
+      email: updatedAccount.getEmail(),
     });
   }
 }

@@ -3,8 +3,8 @@ import { InvalidCredentialsError } from '@/application/usecases/_errors/invalid-
 import { AccountNotFoundError } from '@/application/usecases/accounts/_errors/account-not-found-error';
 import { EditAccountCredentialsUseCase } from '@/application/usecases/accounts/edit-account-credentials';
 import { Account } from '@/domain/entities/account';
-import { InMemoryAccountsRepository } from '@/infra/database/in-memory/in-memory-accounts-repository';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { InMemoryAccountsRepository } from '@/infra/database/in-memory/repositories/in-memory-accounts-repository';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 let accountsRepository: AccountsRepository;
 let sut: EditAccountCredentialsUseCase;
@@ -18,9 +18,12 @@ describe('[UC] Edit account credentials', () => {
   });
 
   it('should edit an account credentials', async () => {
-    const account = await accountsRepository.registerAccount(
-      Account.create('John Doe', 'john.doe@example.com', rawPassword),
+    const account = Account.create(
+      'John Doe',
+      'john.doe@example.com',
+      rawPassword,
     );
+    await accountsRepository.registerAccount(account);
 
     const result = await sut.handle({
       accountId: account.getId(),
@@ -44,9 +47,12 @@ describe('[UC] Edit account credentials', () => {
   });
 
   it('should edit only an account email', async () => {
-    const account = await accountsRepository.registerAccount(
-      Account.create('John Doe', 'john.doe@example.com', rawPassword),
+    const account = Account.create(
+      'John Doe',
+      'john.doe@example.com',
+      rawPassword,
     );
+    await accountsRepository.registerAccount(account);
 
     const result = await sut.handle({
       accountId: account.getId(),
@@ -63,9 +69,12 @@ describe('[UC] Edit account credentials', () => {
   });
 
   it('should edit only an account password', async () => {
-    const account = await accountsRepository.registerAccount(
-      Account.create('John Doe', 'john.doe@example.com', rawPassword),
+    const account = Account.create(
+      'John Doe',
+      'john.doe@example.com',
+      rawPassword,
     );
+    await accountsRepository.registerAccount(account);
 
     const result = await sut.handle({
       accountId: account.getId(),
@@ -93,9 +102,12 @@ describe('[UC] Edit account credentials', () => {
   });
 
   it('should throws an error for invalid current password', async () => {
-    const account = await accountsRepository.registerAccount(
-      Account.create('John Doe', 'john.doe@example.com', rawPassword),
+    const account = Account.create(
+      'John Doe',
+      'john.doe@example.com',
+      rawPassword,
     );
+    await accountsRepository.registerAccount(account);
 
     const result = await sut.handle({
       accountId: account.getId(),
@@ -105,30 +117,5 @@ describe('[UC] Edit account credentials', () => {
 
     expect(result.isLeft()).toBe(true);
     expect(result.value).toBeInstanceOf(InvalidCredentialsError);
-  });
-
-  it('should throws an error if editAccount returns null', async () => {
-    const account = Account.create(
-      'John Doe',
-      'john.doe@example.com',
-      'password123',
-    );
-
-    accountsRepository = {
-      findAccountById: vi.fn().mockResolvedValue(account),
-      editAccount: vi.fn().mockResolvedValue(null),
-    } as unknown as AccountsRepository;
-
-    const sut = new EditAccountCredentialsUseCase(accountsRepository);
-
-    const result = await sut.handle({
-      accountId: 'any-id',
-      email: 'updated.email@example.com',
-      currentRawPassword: 'password123',
-      newRawPassword: 'newPassword456',
-    });
-
-    expect(result.isLeft()).toBe(true);
-    expect(result.value).toBeInstanceOf(AccountNotFoundError);
   });
 });

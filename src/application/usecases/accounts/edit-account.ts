@@ -32,13 +32,11 @@ export class EditAccountUseCase implements UseCase {
       new Date(),
     );
 
-    const result = await this.accountsRepository.editAccount(updatedAccount);
-
-    if (!result) return left(new AccountNotFoundError());
+    await this.accountsRepository.editAccount(updatedAccount);
 
     return right({
-      accountId: result.getId(),
-      name: result.getName(),
+      accountId: updatedAccount.getId(),
+      name: updatedAccount.getName(),
     });
   }
 }

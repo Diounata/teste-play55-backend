@@ -11,7 +11,7 @@ export class AccountFavoriteProduct {
     accountFavoriteProductId: string,
     accountId: string,
     productId: string,
-    createdAt: Date,
+    createdAt: Date | null = null,
   ) {
     this.accountFavoriteProductId = new Ulid(accountFavoriteProductId);
     this.accountId = new Ulid(accountId);
@@ -22,7 +22,7 @@ export class AccountFavoriteProduct {
   static create(
     accountId: string,
     productId: string,
-    createdAt: Date,
+    createdAt: Date | null = null,
   ): AccountFavoriteProduct {
     const accountFavoriteProductId = Ulid.create().getValue();
     return new AccountFavoriteProduct(
