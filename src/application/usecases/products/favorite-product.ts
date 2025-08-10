@@ -40,10 +40,10 @@ export class FavoriteProductUseCase implements UseCase {
     }
 
     const hasFavoriteProduct =
-      await this.accountFavoriteProductsRepository.hasFavoriteProduct(
+      !!(await this.accountFavoriteProductsRepository.findAccountFavoriteProduct(
         accountId,
         productId,
-      );
+      ));
     if (hasFavoriteProduct) {
       return left(new DuplicateAccountFavoritedProductError());
     }

@@ -1,10 +1,10 @@
 import { AccountFavoriteProduct } from '@/domain/entities/account-favorite-product';
 
 export abstract class AccountFavoriteProductsRepository {
-  abstract hasFavoriteProduct(
+  abstract findAccountFavoriteProduct(
     accountId: string,
     productId: string,
-  ): Promise<boolean>;
+  ): Promise<AccountFavoriteProduct | null>;
   abstract favoriteProduct(
     accountFavoriteProduct: AccountFavoriteProduct,
   ): Promise<void>;
