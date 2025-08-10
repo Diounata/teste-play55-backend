@@ -1,0 +1,14 @@
+services:
+  mysql-db:
+    image: mysql
+    restart: always
+    container_name: mysql-db
+    environment:
+      - MYSQL_DATABASE=play55-test
+      - MYSQL_ROOT_PASSWORD=play55-test
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./data/db:/var/lib/mysql

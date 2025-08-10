@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  accountId    String    @id @default(ulid())
+  name         String
+  email        String    @unique
+  passwordHash String    @map("password_hash")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime? @updatedAt @map("updated_at")
+
+  AccountFavoriteProduct AccountFavoriteProduct[]
+
+  @@map("accounts")
+}
+
+model AccountFavoriteProduct {
+  id        String   @id @default(ulid())
+  accountId String   @map("account_id")
+  productId Int      @map("product_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  account Account @relation(fields: [accountId], references: [accountId])
+
+  @@map("account_favorite_products")
+}
