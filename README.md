@@ -84,7 +84,7 @@ Para clonar e executar este projeto, é necessário ter o **Git**, **Node.js** 
     
     ```bash
     # Subir os containers do Docker
-    docker-compose up --build
+    docker-compose up -d --build
     ```
     
 4. Acesse o servidor em http://localhost:4000 para ter acesso às rotas da API e à documentação Swagger.
