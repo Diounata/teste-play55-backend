@@ -1,0 +1,10 @@
+.vscode
+node_modules
+test
+.requests.http
+vitest.config.mts
+dist
+.git
+*.log
+.env
+data

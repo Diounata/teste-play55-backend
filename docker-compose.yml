@@ -4,11 +4,27 @@ services:
     restart: always
     container_name: mysql-db
     environment:
-      - MYSQL_DATABASE=play55-test
-      - MYSQL_ROOT_PASSWORD=play55-test
+      MYSQL_DATABASE: play55-test
+      MYSQL_ROOT_PASSWORD: play55-test
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      retries: 5
+      timeout: 2s
     ports:
       - '3306:3306'
-    expose:
-      - '3306'
     volumes:
       - ./data/db:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: nest-api
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: mysql://root:play55-test@mysql-db:3306/play55-test
+    ports:
+      - '4000:4000'
