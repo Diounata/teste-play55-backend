@@ -4,6 +4,7 @@ import { UseCase } from '@/application/usecases/use-case';
 import { Either, left, right } from '@/core/either';
 import { UseCaseError } from '@/core/errors/use-case-error';
 import { Account } from '@/domain/entities/account';
+import { Injectable } from '@nestjs/common';
 
 export interface Input {
   accountId: string;
@@ -12,6 +13,7 @@ export interface Input {
 
 export type Output = Either<UseCaseError, { accountId: string; name: string }>;
 
+@Injectable()
 export class EditAccountUseCase implements UseCase {
   constructor(private accountsRepository: AccountsRepository) {}
 

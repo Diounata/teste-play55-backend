@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Account {
-  accountId    String    @id @default(ulid())
+  accountId    String    @id @default(ulid()) @map("account_id")
   name         String
   email        String    @unique
   passwordHash String    @map("password_hash")

@@ -9,10 +9,6 @@ async function bootstrap() {
   const port = configService.get('PORT');
   app.setGlobalPrefix('api');
   app.use(cookieParser());
-  app.enableCors({
-    origin: [],
-    credentials: true,
-  });
   await app.listen(port);
 }
 bootstrap();

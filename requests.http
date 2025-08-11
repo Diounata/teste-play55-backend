@@ -1,0 +1,62 @@
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMUsyQjc3NzVGRlpXNFQ0OE1LVlNCTllSUiIsIm5hbWUiOiJKb25hdGhhbSBMdXoiLCJpYXQiOjE3NTQ4NzA4MTUsImV4cCI6MTc1NDg3NDQxNX0.PkcRS0zN0GJqZ_iC2Z8lW8F0v63KOxkoVu_WwoJUYqE
+@cookies = auth-jwt-token={{accessToken}}
+
+### Register account
+
+POST http://localhost:4000/api/accounts/register
+Content-Type: application/json
+
+{
+  "name": "Jonatham Luz",
+  "email": "jonatham.luz@gmail.com",
+  "rawPassword": "senha123"
+}
+
+### Sign in account
+
+POST http://localhost:4000/api/accounts/sign-in
+Content-Type: application/json
+
+{
+  "email": "jonatham.luz@gmail.com",
+  "rawPassword": "senha123"
+}
+
+### Get authenticated account
+
+GET http://localhost:4000/api/accounts/me
+Content-Type: application/json
+Cookie: {{cookies}}
+
+### Edit account
+
+PUT http://localhost:4000/api/accounts
+Content-Type: application/json
+Cookie: {{cookies}}
+
+{
+  "name": "Jonatham Cordeiro Luz"
+}
+
+### Edit account credentials
+
+PUT http://localhost:4000/api/accounts/credentials
+Content-Type: application/json
+Cookie: {{cookies}}
+
+{
+  "currentRawPassword": "senha123",
+  "email": "jonatham.luz@gmail.com",
+  "newRawPassword": "senha-alterada"
+}
+
+
+### Remove account
+
+DELETE http://localhost:4000/api/accounts
+Content-Type: application/json
+Cookie: {{cookies}}
+
+{
+  "rawPassword": "senha-alterada"
+}

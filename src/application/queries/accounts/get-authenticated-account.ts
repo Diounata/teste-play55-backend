@@ -2,6 +2,7 @@ import { DatabaseConnection } from '@/application/database/database-connection';
 import { AccountNotFoundError } from '@/application/usecases/accounts/_errors/account-not-found-error';
 import { Either, left, right } from '@/core/either';
 import { QueryError } from '@/core/errors/query-error';
+import { Injectable } from '@nestjs/common';
 
 interface Input {
   accountId: string;
@@ -20,6 +21,7 @@ type Output = Either<
   }
 >;
 
+@Injectable()
 export class GetAuthenticatedAccountQuery {
   constructor(private database: DatabaseConnection) {}
 
@@ -27,18 +29,18 @@ export class GetAuthenticatedAccountQuery {
     const queryData = await this.database.query(
       /* SQL */ `
       SELECT 
-        id AS "accountId",
+        account_id AS "accountId",
         name,
         email,
         created_at AS "createdAt",
         updated_at AS "updatedAt"
       FROM accounts
-      WHERE id = $1
+      WHERE account_id = ?;
     `,
       [input.accountId],
     );
 
-    if (!queryData) {
+    if (!queryData[0]) {
       return left(new AccountNotFoundError());
     }
 

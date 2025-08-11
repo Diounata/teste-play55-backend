@@ -2,7 +2,7 @@ import { DatabaseConnection } from '@/application/database/database-connection';
 import { AccountFavoriteProductsRepository } from '@/application/repositories/account-favorite-products-repository';
 import { AccountsRepository } from '@/application/repositories/accounts-repository';
 import { Module } from '@nestjs/common';
-import { PgDatabaseConnectionService } from './pg/pg-database-connection.service';
+import { PrismaDatabaseConnectionService } from './prisma/prisma-database-connection.service';
 import { PrismaService } from './prisma/prisma.service';
 import { PrismaAccountFavoriteProductsRepository } from './prisma/repositories/prisma-account-favorite-products-repository';
 import { PrismaAccountsRepository } from './prisma/repositories/prisma-accounts-repository';
@@ -12,7 +12,7 @@ import { PrismaAccountsRepository } from './prisma/repositories/prisma-accounts-
     PrismaService,
     {
       provide: DatabaseConnection,
-      useClass: PgDatabaseConnectionService,
+      useClass: PrismaDatabaseConnectionService,
     },
     {
       provide: AccountsRepository,

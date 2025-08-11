@@ -4,6 +4,7 @@ import { InvalidCredentialsError } from '@/application/usecases/_errors/invalid-
 import { UseCase } from '@/application/usecases/use-case';
 import { Either, left, right } from '@/core/either';
 import { UseCaseError } from '@/core/errors/use-case-error';
+import { Injectable } from '@nestjs/common';
 
 export interface Input {
   email: string;
@@ -12,6 +13,7 @@ export interface Input {
 
 export type Output = Either<UseCaseError, { accessToken: string }>;
 
+@Injectable()
 export class SignInAccountUseCase implements UseCase {
   constructor(
     private accountsRepository: AccountsRepository,

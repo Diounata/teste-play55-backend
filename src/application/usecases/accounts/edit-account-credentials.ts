@@ -6,6 +6,7 @@ import { Either, left, right } from '@/core/either';
 import { UseCaseError } from '@/core/errors/use-case-error';
 import { Account } from '@/domain/entities/account';
 import { Password } from '@/domain/value-objects/password';
+import { Injectable } from '@nestjs/common';
 
 export interface Input {
   accountId: string;
@@ -23,6 +24,7 @@ export type Output = Either<
   }
 >;
 
+@Injectable()
 export class EditAccountCredentialsUseCase implements UseCase {
   constructor(private accountsRepository: AccountsRepository) {}
 
