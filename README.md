@@ -70,38 +70,24 @@ Para mais dúvidas, estou totalmente aberto a explicar com mais detalhes sobre o
 
 Para clonar e executar este projeto, é necessário ter o **Git**, **Node.js** e **Docker** instalados em seu dispositivo. Após instalá-los, siga os passos abaixo:
 
-1. Clonar projeto e subir containers do Docker.
+1. Clonar projeto.
     
     ```bash
     # Clonar projeto
     git clone https://github.com/Diounata/teste-play55-backend
     
     cd teste-play55-backend
-    
-    # Subir os containers do Docker
-    docker compose up -d
     ```
     
 2. Copie o arquivo `.env.example` para `.env` e ajuste as variáveis de ambiente conforme necessário.
-3. Instale as dependências do projeto.
+3. Subir a aplicação Docker.
     
     ```bash
-    # Instalar dependências
-    npm install
+    # Subir os containers do Docker
+    docker-compose up --build
     ```
     
-4. Execute as *migrations* do banco de dados.
-    
-    ```bash
-    npm run prisma:reset
-    ```
-    
-5. Inicie o servidor para ter acesso às rotas da API e à documentação Swagger.
-    
-    ```bash
-    npm run start:dev
-    ```
-    
+4. Acesse o servidor em http://localhost:4000 para ter acesso às rotas da API e à documentação Swagger.
 
 ---
 
