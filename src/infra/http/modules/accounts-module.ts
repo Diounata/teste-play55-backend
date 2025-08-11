@@ -6,6 +6,7 @@ import { RemoveAccountUseCase } from '@/application/usecases/accounts/remove-acc
 import { SignInAccountUseCase } from '@/application/usecases/accounts/sign-in-account';
 import { CryptographyModule } from '@/infra/cryptography/cryptography.module';
 import { DatabaseModule } from '@/infra/database/database.module';
+import { GatewayModule } from '@/infra/gateways/gateway.module';
 import { RegisterAccountController } from '@/infra/http/controllers/accounts/register-account.controller';
 import { Module } from '@nestjs/common';
 import { EditAccountCredentialsController } from '../controllers/accounts/edit-account-credentials.controller';
@@ -15,7 +16,7 @@ import { RemoveAccountController } from '../controllers/accounts/remove-account.
 import { SignInAccountController } from '../controllers/accounts/sign-in-account.controller';
 
 @Module({
-  imports: [DatabaseModule, CryptographyModule],
+  imports: [DatabaseModule, GatewayModule, CryptographyModule],
   controllers: [
     RegisterAccountController,
     SignInAccountController,

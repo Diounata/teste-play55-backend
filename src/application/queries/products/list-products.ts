@@ -7,6 +7,7 @@ import { ProductsGateway } from '@/application/gateways/products-gateway';
 import { ProductNotFoundError } from '@/application/usecases/products/_errors/product-not-found-error';
 import { Either, left, right } from '@/core/either';
 import { QueryError } from '@/core/errors/query-error';
+import { Injectable } from '@nestjs/common';
 
 type Input = PaginationInput;
 
@@ -26,6 +27,7 @@ type Output = Either<
   }>
 >;
 
+@Injectable()
 export class ListProductsQuery {
   constructor(private productsGateway: ProductsGateway) {}
 

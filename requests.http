@@ -1,4 +1,4 @@
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMUsyQjlDUEJWQzNTOVQ3UzJUUDdGUzVINSIsIm5hbWUiOiJKb25hdGhhbSBMdXoiLCJpYXQiOjE3NTQ4NzMwOTIsImV4cCI6MTc1NDg3NjY5Mn0.nt4IS3sitVKSmgYkVseywFW77gKwZoKbVpp7-s5Tv1c
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMUsyQkRSQjFOUUJCUEhEOTUxQ1hWUzJXTSIsIm5hbWUiOiJKb25hdGhhbSBMdXoiLCJpYXQiOjE3NTQ4Nzc2NjgsImV4cCI6MTc1NDg4MTI2OH0.HuYbIZgmInbGgmQMdIG50XRWY0NXoTfulsGn9ljmdsQ
 @cookies = auth-jwt-token={{accessToken}}
 
 ### Register account
@@ -50,7 +50,6 @@ Cookie: {{cookies}}
   "newRawPassword": "senha-alterada"
 }
 
-
 ### Remove account
 
 DELETE http://localhost:4000/api/accounts
@@ -60,3 +59,26 @@ Cookie: {{cookies}}
 {
   "rawPassword": "senha-alterada"
 }
+
+### List paginated products from external API
+
+GET http://localhost:4000/api/products?page=1
+Content-Type: application/json
+
+### List paginated favorite products by account
+
+GET http://localhost:4000/api/products/favorites?page=1
+Content-Type: application/json
+Cookie: {{cookies}}
+
+### Favorite product
+
+POST http://localhost:4000/api/products/favorites/1
+Content-Type: application/json
+Cookie: {{cookies}}
+
+### Unfavorite product
+
+DELETE http://localhost:4000/api/products/favorites/2
+Content-Type: application/json
+Cookie: {{cookies}}

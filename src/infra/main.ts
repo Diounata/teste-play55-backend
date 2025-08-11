@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
@@ -14,6 +15,12 @@ async function bootstrap() {
     origin: 'http://localhost:' + port,
     credentials: true,
   });
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+    }),
+  );
 
   const config = new DocumentBuilder()
     .addCookieAuth('auth-jwt-token')

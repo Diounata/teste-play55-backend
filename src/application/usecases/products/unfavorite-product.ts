@@ -2,6 +2,7 @@ import { AccountFavoriteProductsRepository } from '@/application/repositories/ac
 import { UseCase } from '@/application/usecases/use-case';
 import { Either, left, right } from '@/core/either';
 import { UseCaseError } from '@/core/errors/use-case-error';
+import { Injectable } from '@nestjs/common';
 import { FavoriteProductNotFoundError } from './_errors/favorite-product-not-found-error';
 
 export interface Input {
@@ -14,6 +15,7 @@ export type Output = Either<
   { accountId: string; productId: number }
 >;
 
+@Injectable()
 export class UnfavoriteProductUseCase implements UseCase {
   constructor(
     private accountFavoriteProductsRepository: AccountFavoriteProductsRepository,

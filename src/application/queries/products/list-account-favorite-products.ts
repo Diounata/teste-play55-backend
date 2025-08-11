@@ -8,6 +8,7 @@ import { AccountFavoriteProductsRepository } from '@/application/repositories/ac
 import { FavoriteProductNotFoundError } from '@/application/usecases/products/_errors/favorite-product-not-found-error';
 import { Either, right } from '@/core/either';
 import { QueryError } from '@/core/errors/query-error';
+import { Injectable } from '@nestjs/common';
 
 type Input = PaginationInput & { accountId: string };
 
@@ -28,6 +29,7 @@ type Output = Either<
   }>
 >;
 
+@Injectable()
 export class ListAccountFavoriteProductsQuery {
   constructor(
     private productsGateway: ProductsGateway,
