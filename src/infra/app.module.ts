@@ -18,4 +18,4 @@ import { HttpModule } from './http/http.module';
     HttpModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}

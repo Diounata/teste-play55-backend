@@ -68,8 +68,11 @@ Content-Type: application/json
 ### List paginated favorite products by account
 
 GET http://localhost:4000/api/products/favorites?page=1
-Content-Type: application/json
 Cookie: {{cookies}}
+
+### Get product by id
+
+GET http://localhost:4000/api/products/5
 
 ### Favorite product
 

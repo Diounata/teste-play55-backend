@@ -16,7 +16,7 @@ import { ListProductsRequestQueryParams } from './dtos/list-products-dto';
 @Controller('products')
 @UseInterceptors(CacheInterceptor)
 export class ListProductsController {
-  constructor(private listProductsQuery: ListProductsQuery) { }
+  constructor(private listProductsQuery: ListProductsQuery) {}
 
   @ApiOperation({
     summary: 'Busca os dados dos produtos',
