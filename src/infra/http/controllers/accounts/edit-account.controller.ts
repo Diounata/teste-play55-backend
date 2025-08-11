@@ -11,12 +11,32 @@ import {
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
+import {
+  ApiCookieAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { EditAccountRequestBody } from './dtos/edit-account-dto';
 
+@ApiTags('accounts')
+@ApiCookieAuth()
 @Controller('accounts')
 export class EditAccountController {
   constructor(private editAccountUseCase: EditAccountUseCase) {}
 
+  @ApiOperation({
+    summary: 'Edita os dados básicos da conta',
+    description: 'Permite alterar os dados básicos da conta autenticada',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Dados básicos atualizados com sucesso',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Erro de validação',
+  })
   @UseGuards(AuthGuard)
   @Put('/')
   @HttpCode(200)

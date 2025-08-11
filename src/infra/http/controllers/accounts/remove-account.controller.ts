@@ -11,12 +11,32 @@ import {
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
+import {
+  ApiCookieAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { RemoveAccountRequestBody } from './dtos/remove-account-dto';
 
+@ApiTags('accounts')
+@ApiCookieAuth()
 @Controller('accounts')
 export class RemoveAccountController {
   constructor(private removeAccountUseCase: RemoveAccountUseCase) {}
 
+  @ApiOperation({
+    summary: 'Remove a conta autenticada',
+    description: 'Permite remover a conta autenticada',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Conta removida com sucesso',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Erro de validação ou credenciais inválidas',
+  })
   @UseGuards(AuthGuard)
   @Delete('')
   @HttpCode(200)

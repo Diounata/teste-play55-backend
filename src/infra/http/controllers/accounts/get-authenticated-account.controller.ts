@@ -8,13 +8,33 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
+import {
+  ApiCookieAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
+@ApiTags('accounts')
+@ApiCookieAuth()
 @Controller('accounts')
 export class GetAuthenticatedAccountController {
   constructor(
     private getAuthenticatedAccountQuery: GetAuthenticatedAccountQuery,
   ) {}
 
+  @ApiOperation({
+    summary: 'Busca os dados da conta',
+    description: 'Permite buscar os dados da conta autenticada',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Dados da conta retornados com sucesso',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Erro de validação ou não autorizado',
+  })
   @UseGuards(AuthGuard)
   @Get('me')
   @HttpCode(200)

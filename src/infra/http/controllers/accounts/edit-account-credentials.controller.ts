@@ -11,14 +11,34 @@ import {
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
+import {
+  ApiCookieAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { EditAccountCredentialsRequestBody } from './dtos/edit-account-credentials-dto';
 
+@ApiTags('accounts')
+@ApiCookieAuth()
 @Controller('accounts')
 export class EditAccountCredentialsController {
   constructor(
     private editAccountCredentialsUseCase: EditAccountCredentialsUseCase,
   ) {}
 
+  @ApiOperation({
+    summary: 'Edita as credenciais da conta',
+    description: 'Permite alterar e-mail e senha da conta autenticada',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Credenciais atualizadas com sucesso',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Erro de validação ou credenciais inválidas',
+  })
   @UseGuards(AuthGuard)
   @Put('credentials')
   @HttpCode(200)
