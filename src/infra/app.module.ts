@@ -1,3 +1,4 @@
+import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
@@ -7,6 +8,7 @@ import { HttpModule } from './http/http.module';
 
 @Module({
   imports: [
+    CacheModule.register({ isGlobal: true, ttl: 30000 }),
     ConfigModule.forRoot({
       validate: (env) => envSchema.parse(env),
       isGlobal: true,
@@ -16,4 +18,4 @@ import { HttpModule } from './http/http.module';
     HttpModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }

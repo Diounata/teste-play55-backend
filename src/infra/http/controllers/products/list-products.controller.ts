@@ -1,10 +1,12 @@
 import { ListProductsQuery } from '@/application/queries/products/list-products';
+import { CacheInterceptor } from '@nestjs/cache-manager';
 import {
   Controller,
   Get,
   HttpCode,
   HttpException,
   Query,
+  UseInterceptors,
   ValidationPipe,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -12,8 +14,9 @@ import { ListProductsRequestQueryParams } from './dtos/list-products-dto';
 
 @ApiTags('products')
 @Controller('products')
+@UseInterceptors(CacheInterceptor)
 export class ListProductsController {
-  constructor(private listProductsQuery: ListProductsQuery) {}
+  constructor(private listProductsQuery: ListProductsQuery) { }
 
   @ApiOperation({
     summary: 'Busca os dados dos produtos',
